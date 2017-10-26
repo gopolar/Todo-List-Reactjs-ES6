@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Instruments
-import Styles from './styles.scss';
+import Styles from './styles';
 import moment from 'moment';
 
 export default class App extends Component {
