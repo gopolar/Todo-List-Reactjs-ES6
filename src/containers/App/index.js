@@ -13,9 +13,7 @@ export default class App extends Component {
         return (
             <section className = { Styles.app }>
                 <h1>Welcome!</h1>
-                <p>
-                    It is {moment().format('MMMM D h:mm:ss a')}.
-                </p>
+                <p>It is {moment().format('MMMM D h:mm:ss a')}.</p>
             </section>
         );
     }

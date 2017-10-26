@@ -1,4 +1,8 @@
-export const getUniqueID = (length) => {
+export const getUniqueID = (length = 15) => {
+    if (typeof length !== 'number') {
+        throw new Error('The function argument should be a number!');
+    }
+
     let text = '';
     const possible =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
