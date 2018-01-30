@@ -28,15 +28,14 @@ export default class Composer extends Component {
 
         if (taskDescription) {
             this.props.createTask(taskDescription);
-            this.setState(() => ({ taskDescription }));
+            this.setState(() => ({ taskDescription: '' }));
         }
     }
 
     _handleTextAreaChange = ({ target }) => {
         const { value: taskDescription } = target;
 
-        console.log(taskDescription);
-        if (taskDescription.length < 30) {
+        if (taskDescription.length <= 30) {
             this.setState({ charactersExceeded: false });
             this.setState({ taskDescription });
         } else {

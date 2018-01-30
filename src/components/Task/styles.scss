@@ -1,0 +1,25 @@
+@import '../../theme/palette';
+
+.task {
+    margin-top: 15px;
+    padding: 15px;
+    background: $color2;
+    span {
+        margin: 0 15px;
+        color: $textColor1;
+    }
+
+    .cross {
+        position: relative;
+        width: 10px;
+        height: 10px;
+        background-image: url('../../theme/assets/cross.png');
+        background-repeat: no-repeat;
+        cursor: pointer;
+        margin-top: 4px;
+        float: right;
+        &:hover {
+            background-position: -13px 0;
+        }
+    }
+}
