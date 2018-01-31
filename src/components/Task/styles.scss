@@ -11,15 +11,31 @@
 
     .cross {
         position: relative;
-        width: 10px;
-        height: 10px;
-        background-image: url('../../theme/assets/cross.png');
+        width: 14px;
+        height: 14px;
+        background-image: url('../../theme/assets/cross+.png');
         background-repeat: no-repeat;
+        background-size: 28px;
         cursor: pointer;
-        margin-top: 4px;
+        margin: 2px 0 0 15px;
         float: right;
         &:hover {
-            background-position: -13px 0;
+            background-position: -14px 0;
+        }
+    }
+
+    .pencil {
+        position: relative;
+        width: 14px;
+        height: 14px;
+        background-image: url('../../theme/assets/pencil+.png');
+        background-repeat: no-repeat;
+        background-size: 28px;
+        cursor: pointer;
+        margin: 2px 0 0 15px;
+        float: right;
+        &:hover {
+            background-position: -14px 0;
         }
     }
 }
