@@ -20,7 +20,8 @@ export default class Composer extends Component {
 
     state = {
         charactersExceeded: false,
-        taskDescription:    ''
+        taskDescription:    '',
+        allChecked:         false
     };
 
     _handleSubmit (event) {
@@ -46,21 +47,27 @@ export default class Composer extends Component {
     };
 
     _handleIsCompletedAll () {
-        this.props.isCompletedAll();
+        const { allChecked } = this.state;
+
+        this.setState(() => ({ allChecked: !allChecked }));
+
+        !allChecked ? this.props.isCompletedAll() : null; //все буду сделанные если Complete All не checked
     }
 
 
     render () {
-        const { taskDescription, charactersExceeded } = this.state;
+        const { taskDescription, charactersExceeded, allChecked } = this.state;
 
         return (
             <section className = { Styles.composer } >
                 <form onSubmit = { this.handleSubmit } >
-                    <input
-                        // checked = { isCompleted }
+
+                    <label><input
+                        checked = { allChecked }
                         type = 'checkbox'
                         onChange = { this.handleIsCompletedAll }
-                    /><span>Done all</span>
+                    />Done all</label>
+
                     <input
                         className = { `
                         ${charactersExceeded ? Styles.limitWarning : null}
