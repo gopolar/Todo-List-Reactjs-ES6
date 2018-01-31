@@ -1,6 +1,6 @@
 //Core
 import React, { Component } from 'react';
-import { string, number, func } from 'prop-types';
+import { string, number, func, bool } from 'prop-types';
 
 //Instruments
 import Styles from './styles';
@@ -8,14 +8,17 @@ import Styles from './styles';
 export default class Task extends Component {
 
     static propTypes = {
-        deleteTask:      func.isRequired,
-        id:              number.isRequired,
-        taskDescription: string.isRequired
+        deleteTask:        func.isRequired,
+        id:                number.isRequired,
+        isCompleted:       bool.isRequired,
+        isCompletedToggle: func.isRequired,
+        taskDescription:   string.isRequired
     };
 
     constructor () {
         super();
         this.handleDeleteTask = ::this._handleDeleteTask;
+        this.handleIsCompletedToggle = ::this._handleIsCompletedToggle;
     }
 
     _handleDeleteTask () {
@@ -24,15 +27,26 @@ export default class Task extends Component {
         this.props.deleteTask(id);
     }
 
+    _handleIsCompletedToggle () {
+        const { id } = this.props;
+
+        this.props.isCompletedToggle(id);
+    }
+
     render () {
-        const { taskDescription } = this.props;
+        const { taskDescription, isCompleted } = this.props;
 
 
         return (
             <section className = { Styles.task }>
                 <form>
-                    <input type = 'checkbox' /><span>{ taskDescription }</span>
+                    <input
+                        checked = { isCompleted }
+                        type = 'checkbox'
+                        onChange = { this.handleIsCompletedToggle }
+                    /><span>{ taskDescription }</span>
                     <i className = { Styles.cross } onClick = { this.handleDeleteTask } />
+                    {/*<i className = { Styles.pencil } onClick = { this.handleEditTask } />*/}
                 </form>
             </section>
         );

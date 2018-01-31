@@ -1,6 +1,11 @@
 @import '../../theme/palette';
 
 .composer {
+
+    margin-top: 15px;
+    padding: 0 20px 20px 20px;
+    border-top: 1px solid $color2;
+
     .inputStyle {
         font-size: 1.1em;
         outline-width: 0;
@@ -39,6 +44,14 @@
         &:active {
             background: darken($color3, 5);
         }
+    }
+
+    input[type=checkbox] {
+        margin: 0 15px;
+    }
+
+    span {
+        margin-right: 15px;
     }
 
 }

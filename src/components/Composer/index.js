@@ -8,12 +8,14 @@ import Styles from './styles';
 export default class Composer extends Component {
 
     static propTypes = {
-        createTask: func.isRequired
+        createTask:     func.isRequired,
+        isCompletedAll: func.isRequired
     };
 
     constructor () {
         super();
         this.handleSubmit = ::this._handleSubmit;
+        this.handleIsCompletedAll = ::this._handleIsCompletedAll;
     }
 
     state = {
@@ -43,6 +45,10 @@ export default class Composer extends Component {
         }
     };
 
+    _handleIsCompletedAll () {
+        this.props.isCompletedAll();
+    }
+
 
     render () {
         const { taskDescription, charactersExceeded } = this.state;
@@ -50,6 +56,11 @@ export default class Composer extends Component {
         return (
             <section className = { Styles.composer } >
                 <form onSubmit = { this.handleSubmit } >
+                    <input
+                        // checked = { isCompleted }
+                        type = 'checkbox'
+                        onChange = { this.handleIsCompletedAll }
+                    /><span>Done all</span>
                     <input
                         className = { `
                         ${charactersExceeded ? Styles.limitWarning : null}

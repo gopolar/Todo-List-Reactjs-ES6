@@ -12,12 +12,20 @@ export default class Todo extends Component {
         super();
         this.createTask = ::this._createTask;
         this.deleteTask = ::this._deleteTask;
+        this.isCompletedToggle = ::this._isCompletedToggle;
+        this.isCompletedAll = ::this._isCompletedAll;
+
+
     }
 
     state = {
         tasks: [
             {
-                taskDescription: 'task1',
+                taskDescription: 'task 1',
+                isCompleted:     false
+            },
+            {
+                taskDescription: 'task 2',
                 isCompleted:     true
             }
         ]
@@ -27,7 +35,7 @@ export default class Todo extends Component {
         const { tasks } = this.state;
 
         this.setState(() => ({
-            tasks: [{ taskDescription }, ...tasks]
+            tasks: [{ taskDescription, isCompleted: false }, ...tasks]
         }));
     }
 
@@ -43,6 +51,26 @@ export default class Todo extends Component {
         }
     }
 
+    _isCompletedToggle (id) {
+        const { tasks } = this.state;
+
+        tasks[id].isCompleted = !tasks[id].isCompleted;
+        this.setState(() => ({
+            tasks: [...tasks]
+        }));
+    }
+
+    _isCompletedAll () {
+        const { tasks } = this.state;
+
+
+        tasks.forEach((task) => task.isCompleted = true);
+
+        this.setState(() => ({
+            tasks: [...tasks]
+        }));
+    }
+
     render () {
         const { tasks } = this.state;
 
@@ -50,6 +78,8 @@ export default class Todo extends Component {
             <Task
                 deleteTask = { this.deleteTask }
                 id = { index }
+                isCompleted = { task.isCompleted }
+                isCompletedToggle = { this.isCompletedToggle }
                 key = { index }
                 taskDescription = { task.taskDescription }
             />
@@ -58,7 +88,10 @@ export default class Todo extends Component {
         return (
             <section className = { Styles.todo }>
                 { mappedTasks }
-                <Composer createTask = { this.createTask } />
+                <Composer
+                    createTask = { this.createTask }
+                    isCompletedAll = { this.isCompletedAll }
+                />
             </section>
         );
     }
