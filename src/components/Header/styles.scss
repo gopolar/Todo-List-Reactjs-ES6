@@ -1,0 +1,47 @@
+@import '../../theme/palette';
+
+.header {
+
+    height: 75px;
+    margin-top: 5px;
+    padding: 0 5px;
+    border-bottom: 1px solid $color2;
+
+
+    h1 {
+        padding: 25px 15px;
+        float: left;
+        font-size: 1.2em;
+        color: $textColor2;
+        font-weight: 100;
+    };
+
+    input[type=text] {
+        margin: 15px 15px 0 0;
+        padding: 10px 30px;
+        float: right;
+        border: 1px solid $color2;
+        border-radius: 50px;
+        outline-width: 0;
+        background: $color2;
+        color: $textColor2;
+        font-size: 1.1em;
+        width: 80px;
+        &::placeholder {
+            color: $textColor2;
+        }
+        &:focus {
+            border: 1px solid darken($color2, 10);
+        }
+    }
+
+
+    //.limitWarning {
+    //    &:focus {
+    //        box-shadow: 0 0 8px #FAEFF6;
+    //        background: #FAEFF6;
+    //        border: 1px solid darken(#FAEFF6, 10);
+    //
+    //    }
+    //}
+}

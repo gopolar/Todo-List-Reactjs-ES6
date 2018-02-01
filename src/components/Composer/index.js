@@ -38,6 +38,7 @@ export default class Composer extends Component {
     _handleTextAreaChange = ({ target }) => {
         const { value: taskDescription } = target;
 
+        // лимит в 30 символов
         if (taskDescription.length <= 30) {
             this.setState({ charactersExceeded: false });
             this.setState({ taskDescription });
@@ -51,7 +52,7 @@ export default class Composer extends Component {
 
         this.setState(() => ({ allChecked: !allChecked }));
 
-        !allChecked ? this.props.isCompletedAll() : null; //все буду сделанные если Complete All не checked
+        !allChecked ? this.props.isCompletedAll() : null; //все станут checked только если 'Complete All' был не checked
     }
 
 

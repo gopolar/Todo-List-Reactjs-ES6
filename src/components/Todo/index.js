@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import Task from '../Task';
 import Composer from '../Composer';
 import Styles from './styles';
+import Header from '../Header';
 
 export default class Todo extends Component {
 
@@ -14,22 +15,24 @@ export default class Todo extends Component {
         this.deleteTask = ::this._deleteTask;
         this.isCompletedToggle = ::this._isCompletedToggle;
         this.isCompletedAll = ::this._isCompletedAll;
-
-
+        this.search = ::this._search;
+        this.state.displayedItems = this.state.tasks;
     }
 
     state = {
         tasks: [
             {
-                taskDescription: 'task 1',
+                taskDescription: 'aa',
                 isCompleted:     false
             },
             {
-                taskDescription: 'task 2',
+                taskDescription: 'ab',
                 isCompleted:     true
             }
-        ]
+        ],
+        displayedItems: [] //новый массив для Search
     };
+
 
     _createTask (taskDescription) {
         const { tasks } = this.state;
@@ -40,6 +43,9 @@ export default class Todo extends Component {
     }
 
     _deleteTask (id) {
+
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
         const { tasks } = this.state;
 
         if (id > -1) {
@@ -71,8 +77,36 @@ export default class Todo extends Component {
         }));
     }
 
+
+    _search (term) {
+        const { tasks, displayedItems } = this.state;
+
+        // this.setState(() => ({
+        //     displayedItems: tasks.filter(function(el) {
+        //         var searchValue = el.taskDescription.toLowerCase();
+        //         return searchValue.indexOf(term.toLowerCase()) !== -1;
+        //     })
+        // }));
+
+    }
+
+    componentWillMount () {
+        localStorage.getItem('tasks') && this.setState({
+            tasks: JSON.parse(localStorage.getItem('tasks'))
+        });
+    }
+
+    //saving to localStorage
+    componentWillUpdate (nextProps, nextState) {
+        localStorage.setItem('tasks', JSON.stringify(nextState.tasks));
+    }
+
     render () {
-        const { tasks } = this.state;
+
+        const { tasks, displayedItems } = this.state;
+
+        console.log('displayedItems', displayedItems);
+
 
         const mappedTasks = tasks.map((task, index) => (
             <Task
@@ -87,6 +121,9 @@ export default class Todo extends Component {
 
         return (
             <section className = { Styles.todo }>
+                <Header
+                    search = { this.search }
+                />
                 { mappedTasks }
                 <Composer
                     createTask = { this.createTask }
