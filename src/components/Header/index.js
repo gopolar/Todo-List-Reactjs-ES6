@@ -1,6 +1,6 @@
 // Core
 import React, { Component } from 'react';
-import { func } from 'prop-types';
+// import { func } from 'prop-types';
 
 //Instruments
 import Styles from './styles';
@@ -8,26 +8,22 @@ import Styles from './styles';
 
 export default class Header extends Component {
 
-    static propTypes = {
-        search:     func.isRequired
-    };
-
-    constructor () {
-        super();
-    }
+    // static propTypes = {
+    //     search:     func.isRequired
+    // };
 
     state = {
     };
 
-    _handleSearch = ({ target }) => {
-        const { value: term } = target;
-
-        this.props.search(term);
-    };
+    // _handleSearch = ({ target }) => {
+    //     const { value: term } = target;
+    //
+    //     this.props.search(term);
+    // };
 
 
     render () {
-        const { term, search } = this.state;
+        // const { term, search } = this.state;
 
         return (
             <section className = { Styles.header } >

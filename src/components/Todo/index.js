@@ -15,8 +15,8 @@ export default class Todo extends Component {
         this.deleteTask = ::this._deleteTask;
         this.isCompletedToggle = ::this._isCompletedToggle;
         this.isCompletedAll = ::this._isCompletedAll;
-        this.search = ::this._search;
-        this.state.displayedItems = this.state.tasks;
+        // this.search = ::this._search;
+        // this.state.displayedItems = this.state.tasks;
     }
 
     state = {
@@ -33,6 +33,16 @@ export default class Todo extends Component {
         displayedItems: [] //новый массив для Search
     };
 
+    componentWillMount () {
+        localStorage.getItem('tasks') && this.setState({
+            tasks: JSON.parse(localStorage.getItem('tasks'))
+        });
+    }
+
+    //saving to localStorage
+    componentWillUpdate (nextProps, nextState) {
+        localStorage.setItem('tasks', JSON.stringify(nextState.tasks));
+    }
 
     _createTask (taskDescription) {
         const { tasks } = this.state;
@@ -43,8 +53,6 @@ export default class Todo extends Component {
     }
 
     _deleteTask (id) {
-
-        localStorage.setItem('tasks', JSON.stringify(tasks));
 
         const { tasks } = this.state;
 
@@ -78,28 +86,17 @@ export default class Todo extends Component {
     }
 
 
-    _search (term) {
-        const { tasks, displayedItems } = this.state;
+    // _search (term) {
+    //     const { tasks, displayedItems } = this.state;
+    //
+    //     this.setState(() => ({
+    //         displayedItems: tasks.filter(function(el) {
+    //             var searchValue = el.taskDescription.toLowerCase();
+    //             return searchValue.indexOf(term.toLowerCase()) !== -1;
+    //         })
+    //     }));
+    // }
 
-        // this.setState(() => ({
-        //     displayedItems: tasks.filter(function(el) {
-        //         var searchValue = el.taskDescription.toLowerCase();
-        //         return searchValue.indexOf(term.toLowerCase()) !== -1;
-        //     })
-        // }));
-
-    }
-
-    componentWillMount () {
-        localStorage.getItem('tasks') && this.setState({
-            tasks: JSON.parse(localStorage.getItem('tasks'))
-        });
-    }
-
-    //saving to localStorage
-    componentWillUpdate (nextProps, nextState) {
-        localStorage.setItem('tasks', JSON.stringify(nextState.tasks));
-    }
 
     render () {
 
