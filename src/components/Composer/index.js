@@ -52,7 +52,7 @@ export default class Composer extends Component {
 
         this.setState(() => ({ allChecked: !allChecked }));
 
-        !allChecked ? this.props.isCompletedAll() : null; //все станут checked только если 'Complete All' был не checked
+        this.props.isCompletedAll(!allChecked);
     }
 
 

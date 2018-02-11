@@ -15,22 +15,21 @@ export default class Todo extends Component {
         this.deleteTask = ::this._deleteTask;
         this.isCompletedToggle = ::this._isCompletedToggle;
         this.isCompletedAll = ::this._isCompletedAll;
-        // this.search = ::this._search;
-        // this.state.displayedItems = this.state.tasks;
+        this.search = ::this._search;
     }
 
     state = {
         tasks: [
             {
-                taskDescription: 'aa',
+                taskDescription: 'task1',
                 isCompleted:     false
             },
             {
-                taskDescription: 'ab',
+                taskDescription: 'task2',
                 isCompleted:     true
             }
         ],
-        displayedItems: [] //новый массив для Search
+        term: ''
     };
 
     componentWillMount () {
@@ -44,15 +43,20 @@ export default class Todo extends Component {
         localStorage.setItem('tasks', JSON.stringify(nextState.tasks));
     }
 
+
     _createTask (taskDescription) {
+
         const { tasks } = this.state;
 
         this.setState(() => ({
             tasks: [{ taskDescription, isCompleted: false }, ...tasks]
         }));
+
     }
 
     _deleteTask (id) {
+
+        console.time('olesya');
 
         const { tasks } = this.state;
 
@@ -63,6 +67,8 @@ export default class Todo extends Component {
             }));
 
         }
+
+        console.timeEnd('olesya');
     }
 
     _isCompletedToggle (id) {
@@ -74,11 +80,11 @@ export default class Todo extends Component {
         }));
     }
 
-    _isCompletedAll () {
+    _isCompletedAll (allChecked) {
         const { tasks } = this.state;
 
 
-        tasks.forEach((task) => task.isCompleted = true);
+        tasks.forEach((task) => task.isCompleted = allChecked);
 
         this.setState(() => ({
             tasks: [...tasks]
@@ -86,26 +92,26 @@ export default class Todo extends Component {
     }
 
 
-    // _search (term) {
-    //     const { tasks, displayedItems } = this.state;
-    //
-    //     this.setState(() => ({
-    //         displayedItems: tasks.filter(function(el) {
-    //             var searchValue = el.taskDescription.toLowerCase();
-    //             return searchValue.indexOf(term.toLowerCase()) !== -1;
-    //         })
-    //     }));
-    // }
-
+    _search (term) {
+        this.setState({ term });
+    }
 
     render () {
+        const { tasks, term } = this.state;
 
-        const { tasks, displayedItems } = this.state;
+        let filteredItems = [];
 
-        console.log('displayedItems', displayedItems);
+        if (term) {
+            filteredItems = tasks.filter((word) => {
+                const searchValue = word.taskDescription.toLowerCase();
 
+                return searchValue.indexOf(term.toLowerCase()) !== -1;
+            });
+        } else {
+            filteredItems = tasks;
+        }
 
-        const mappedTasks = tasks.map((task, index) => (
+        const mappedTasks = filteredItems.map((task, index) => (
             <Task
                 deleteTask = { this.deleteTask }
                 id = { index }
