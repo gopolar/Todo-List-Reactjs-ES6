@@ -2,7 +2,7 @@
 
 ## In order to start a project follow these steps:
 
-+ `git clone git@github.com:Lectrum/react-intensive-boilerplate.git`
-+ `cd react-intensive-boilerplate`
++ `git clone https://github.com/gopolar/Todo-List-Reactjs-ES6`
++ `cd Todo-List-Reactjs-ES6`
 + `yarn` or `npm i`
 + `yarn start` or `npm start`
