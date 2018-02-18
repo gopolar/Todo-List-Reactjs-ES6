@@ -1,4 +1,4 @@
-# Lectrum React intensive boilerplate
+# Todo list written on ReactJS
 
 ## In order to start a project follow these steps:
 
