@@ -25,12 +25,12 @@
     }
 
     .limitWarning {
-        &:focus {
+
             box-shadow: 0 0 8px #FAEFF6;
             background: #FAEFF6;
             border: 1px solid darken(#FAEFF6, 10);
 
-        }
+
     }
 
     input[type=submit] {
